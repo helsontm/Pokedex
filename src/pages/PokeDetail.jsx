@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-const PokeDatail=()=>{
+const PokeDetail=()=>{
 
     const[pDetail, setPDetail]=useState({})
 
@@ -50,4 +50,4 @@ return (
 
 )
 }
-export default PokeDatail
+export default PokeDetail

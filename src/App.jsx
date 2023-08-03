@@ -2,7 +2,7 @@ import './App.css'
 import { HashRouter, Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Pokedex from './pages/Pokedex';
-import PokeDetail from '.pages/PokeDetail'
+import PokeDetail from './pages/PokeDetail'
 import NotFound from './pages/NotFound';
 function App() {
 

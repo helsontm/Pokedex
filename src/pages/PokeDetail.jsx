@@ -1,10 +1,12 @@
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-const PokeDetail=()=>{
+const PokeDetail=({})=>{
 
     const[pDetail, setPDetail]=useState({})
+
+    const nav=useNavigate()
 
     const{id}=useParams()
     useEffect(()=>{
@@ -13,16 +15,18 @@ const PokeDetail=()=>{
         .then((resp) => {
           setPDetail(resp.data);
         })
-        .catch(error=>{console.error(error)
-             
+        .catch(error=>{
+          console.error(error)
+          nav('/not_found')  
           }  )
     }, []);
 
 return (
 <>
-<Link to='/pokedex'>Ir a Lista De Pokemones</Link>
+<Link to='/pokedex'><img src="salida.png" title="Regresar A La Pokedex"/></Link>
 <main className=" detail">
-
+  <div className="contDetalle">
+<div>
 <h1>Detalle del Pokemon</h1>
 <div className="contImgDePoke">
 <img src={pDetail.sprites?.other?.['official-artwork']?.front_default} className="imgDePoke"></img>
@@ -38,12 +42,14 @@ return (
 <h3>Special-Attack {pDetail.stats?.[3]?.base_stat}</h3>
 <h3>Special-Defense {pDetail.stats?.[4]?.base_stat}</h3>
 <h3>Speed {pDetail.stats?.[5]?.base_stat}</h3>
-<button className="ulMove">Moviminetos: {pDetail?.moves?.map(mov=>
+</div>
+<div>
+<button className="ulMove">Moviminets {pDetail?.moves?.map(mov=>
 <button key={mov?.move?.name} className="libMove">{mov?.move?.name}</button>
 
 )}</button>
-
-
+</div>
+</div>
 </main>
 
 </>

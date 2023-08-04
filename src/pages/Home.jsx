@@ -1,39 +1,60 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Home=()=>{
 
-    
+    const [userLogin, setUserLogin] = useState("");
+    const naveg=useNavigate()
+    const desp= useDispatch()
+   
+    const submit = (e) => {
+        //Un metodo que impide el comportamiento predeterminado del evento
+        e.preventDefault();
+        if(userLogin!==''){
+            desp(setUserLogin(userLogin))
+            naveg('/pokedex')
+            {<Link to="/pokedex"></Link>}
+            localStorage.setItem('userLogin', userLogin)
+        }else
+        alert('Por favor digita un nombre')
+    }
 
+
+    
 
     
     
     return(
 <>
-<main>
-    <h1>Home</h1>
 
-    <div>
+    <h1>Home</h1>
+     
+     <div className="contHome"> 
+
+    <div className="home">
         <h2>Bienvenido Trainer</h2>
         <p>Ingresa tu nombre para acceder a la Pokedex</p>
         <img src="/entrenador.png" className="imgTrainer"></img>
-        <form  >
+        <form onSubmit={(e) => submit(e)}>
             <h3 htmlFor="name">Ingresa tu nombre aqui:</h3>
-<input  type="text" id="name"
-placeholder="Your Name plese Trainr"/>
-<button type="submit">Ingresar</button>
-        </form>
-    </div>
+        <input
+          type="text"
+          placeholder="Your Name plese Trainr"
+          value={userLogin}
+          onChange={(e) => setUserLogin(e.target.value)}
+        />
+        <button type="submit">Buscar</button>
+      </form>    
+    
 
-    <ul>
-        <li>
-          <Link to="/pokedex">Ir a Lista de Pokemones</Link>
-        </li>
-        </ul>
         <Link to='/pokedex'>
             <button>Ir a Lista de Pokemones</button>
         </Link>
-</main>
+        </div>
+        </div>
+
 </>
 
     )

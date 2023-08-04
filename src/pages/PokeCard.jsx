@@ -3,15 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+
+
 const PokeCard=({url})=>{
+
+  
    
     const [searchpoke, setSearchPoke] = useState({});
-
-   
     const nav=useNavigate()
-
-   
-
     useEffect(() => {
         axios
         /*.get(`https://pokeapi.co/api/v2/pokemon/${url}`)*/
@@ -26,15 +25,18 @@ const PokeCard=({url})=>{
           }  )
     }, []);
 
-   
+    //Areglo de colores
+    
     
     return(
       
 <main className="pokeCard">
 <Link to={`${searchpoke.id}`} className="link">
 <div className="conteImgPokemon">
+  {/*para obtener la imagen */}
+
 <img src={searchpoke.sprites?.other?.['official-artwork']?.front_default} className="imgPoke"></img>
-<h2>{searchpoke.name}</h2>
+<label>N° {searchpoke.id}</label><h2>{searchpoke.name}</h2>
 <hr></hr>
 <h3>{searchpoke.stats?.[0]?.base_stat} PS</h3>
 </div>
